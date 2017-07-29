@@ -5,9 +5,9 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-12">
-                <div id="first">
-      <div id="second"></div>
-     </div>
+            <p class="text-center" style="margin-top: 40px;">1300/10000</p>
+                <div class="progressbar"><div class="progressbar2"></div></div>
+                
                 <h1 class="page-header">
                     Your Entries
                 </h1>
