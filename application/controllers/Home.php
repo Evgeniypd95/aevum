@@ -20,7 +20,8 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['query'] = $this->db->get('test');
+		
+		$data['query'] = $this->db->get('posts');
 		// $data = array(
   		// 'title' => 'My Title',
   		// 'heading' => 'My Heading',
