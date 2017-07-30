@@ -20,13 +20,16 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		
-		$data['query'] = $this->db->get('posts');
+// 		$this->db->select_sum('time');
+// $query = $this->db->get('posts');
+		$this->db->select_sum('time');
+	$data['posts'] = $this->db->get('posts');
 		// $data = array(
-  		// 'title' => 'My Title',
-  		// 'heading' => 'My Heading',
-  		// 'message' => 'My Message'
-		// 			); useful when fetching multiple tables
+		// 	'hours' => $this->db->select_sum('time'),
+  // 		'posts' => $this->db->get('posts')
+  		
+
+					// ); 
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
 		$this->load->view('home_page', $data);
