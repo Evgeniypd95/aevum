@@ -3,23 +3,35 @@
 
         
 
-            <!-- Blog Entries Column -->
+            
             
 
 <div class="row">
             <div class="col-md-12">
-            <?php foreach ($num->result() as $row): ?>
+            <?php foreach ($timedb->result() as $row): ?>
             <p class="text-center" style="margin-top: 40px;">
-            <?php $test=strtotime($row->date); $date = strtotime("last monday");
-echo date('M d, Y', $date); ?> 
-            <!-- <?php 
-            if (empty($row->date)) echo "0";
-            else echo $row->date;  ?>/10000</p>
-            
-            <?php endforeach;?> -->
-                <div class="progressbar"><div class="progressbar2"></div>
+            Your progress from last monday to this sunday is:</br>
+            <?php 
+            if (empty($row->time)) echo "0";
+            else echo $row->time;  ?>/21</p>
+            <?php endforeach;?> 
+                <div class="progressbar"><div id="myBtn" onclick="myFunction()" class="progressbar2"></div>
                 </div>
                 </div></div>
+                <?php foreach ($timedb->result() as $row): ?>
+<script type="text/javascript">document.getElementById("myBtn").style.width = "<?php $tothour = $row->time; $width = $tothour*100/21; if ($width>100) {echo 100;} else {echo $width;}?>%";</script>
+<?php endforeach;?> 
+
+<?php foreach ($timetotal->result() as $row): ?>
+            <p class="text-center">
+            Total hours:</br>
+            <?php 
+            if (empty($row->time)) echo "0";
+            else echo $row->time;  ?>/10000</p>
+            <?php endforeach;?> 
+                    
+<!-- Blog Entries Column -->
+
                 <h2 class="page-header">
                     New Entry
                 </h2>
@@ -33,7 +45,7 @@ echo date('M d, Y', $date); ?>
                         </div>
                         <div class="form-group">
                             <label for="InputTime">Time</label>
-                            <input type="time" class="form-control" name="time" id="InputTime" placeholder="120 min">
+                            <input type="time" class="form-control" name="time" id="InputTime" placeholder="120 hour">
                         </div>
                         <div class="form-group">
                             <label for="InputComment">Comment</label>
@@ -58,7 +70,6 @@ echo date('M d, Y', $date); ?>
 
                 <?php endforeach;?>
                 
-            </div>
+            
 
-        </div>
-        <!-- /.row -->
+        
