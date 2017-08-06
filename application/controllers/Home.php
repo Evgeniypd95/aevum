@@ -21,17 +21,47 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		
-		$data['query'] = $this->db->get('posts');
-		// $data = array(
-  		// 'title' => 'My Title',
-  		// 'heading' => 'My Heading',
-  		// 'message' => 'My Message'
-		// 			); useful when fetching multiple tables
+		$this->load->library(array('form_validation', 'session'));
+		// $data['query'] = $this->db->get('posts');
+		$data = array(
+  		'query' => $this->db->get('posts'),
+  		'success' => 'My Heading',
+  		'message' => 'My Message'
+					);
+		
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
 		$this->load->view('home_page', $data);
 		$this->load->view('templates/footer');
 	}
+
+	public function form()
+        {
+                $this->load->helper(array('form', 'url'));
+
+                $this->load->library(array('form_validation', 'session'));
+
+                $this->form_validation->set_rules('activity', 'Activity', 'required');
+                $this->form_validation->set_rules('time', 'Time', 'required|numeric');
+                
+                $this->form_validation->set_rules('comment', 'Comment', 'required');
+
+                if ($this->form_validation->run() == FALSE)
+                {
+                        $this->index();
+                }
+                else
+                {
+                	$data = array(
+        				'activity' => $this->input->post('activity'),
+        				'time' => $this->input->post('time'),
+        				'comment' => $this->input->post('comment')
+								);
+					$this->db->insert('posts', $data);
+                	$this->session->set_flashdata('success_msg', 'success');
+                	$this->index();      
+                }
+        }
 
 
 }
