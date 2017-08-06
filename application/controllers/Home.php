@@ -22,9 +22,9 @@ class Home extends CI_Controller {
 	{
 		$this->load->library(array('form_validation', 'session'));
 		//how to eliminate foreach?
-		
-		$this->db->where('date >= ', date('Y/m/d/h/i', strtotime('sunday this week')));
-		$this->db->where('date <= ', date('Y/m/d/h/i', strtotime('monday last week')));
+
+		$this->db->where('date >= ', date('Y/m/d/h/i', strtotime('monday this week')));
+		$this->db->where('date <= ', date('Y/m/d/h/i', strtotime('sunday this week')));
 		$this->db->select_sum('time');
 		$data['timedb'] = $this->db->get('posts');
 
