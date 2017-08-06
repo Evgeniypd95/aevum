@@ -22,13 +22,8 @@ class Home extends CI_Controller {
 	{
 		
 		$this->load->library(array('form_validation', 'session'));
-		// $data['query'] = $this->db->get('posts');
-		$data = array(
-  		'query' => $this->db->get('posts'),
-  		'success' => 'My Heading',
-  		'message' => 'My Message'
-					);
-		
+		$this->db->order_by('id', 'DESC');
+		$data['query'] = $this->db->get('posts');
 		$this->load->view('templates/header');
 		$this->load->view('templates/navigation');
 		$this->load->view('home_page', $data);
