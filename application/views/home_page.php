@@ -4,9 +4,16 @@
         
 
             <!-- Blog Entries Column -->
-            <div class="row">
+            
+
+<div class="row">
             <div class="col-md-12">
-            <p class="text-center" style="margin-top: 40px;">1300/10000</p>
+            <?php foreach ($num->result() as $row): ?>
+            <p class="text-center" style="margin-top: 40px;">
+            <?php if (empty($row->time)): echo "0"?>
+            <?php else: echo $row->time ?>
+            <?php endif ?>/10000</p>
+            <?php endforeach;?>
                 <div class="progressbar"><div class="progressbar2"></div>
                 </div>
                 </div></div>

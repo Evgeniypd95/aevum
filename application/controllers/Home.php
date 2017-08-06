@@ -20,8 +20,11 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		
 		$this->load->library(array('form_validation', 'session'));
+		//how to eliminate foreach?
+		$this->db->select_sum('time');
+		$data['num'] = $this->db->get('posts');
+
 		$this->db->order_by('id', 'DESC');
 		$data['query'] = $this->db->get('posts');
 		$this->load->view('templates/header');
@@ -31,32 +34,30 @@ class Home extends CI_Controller {
 	}
 
 	public function form()
+    {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library(array('form_validation', 'session'));
+
+        $this->form_validation->set_rules('activity', 'Activity', 'required');
+        $this->form_validation->set_rules('time', 'Time', 'required|numeric');
+        $this->form_validation->set_rules('comment', 'Comment', 'required');
+
+        if ($this->form_validation->run() == FALSE)
         {
-                $this->load->helper(array('form', 'url'));
-
-                $this->load->library(array('form_validation', 'session'));
-
-                $this->form_validation->set_rules('activity', 'Activity', 'required');
-                $this->form_validation->set_rules('time', 'Time', 'required|numeric');
-                
-                $this->form_validation->set_rules('comment', 'Comment', 'required');
-
-                if ($this->form_validation->run() == FALSE)
-                {
-                        $this->index();
-                }
-                else
-                {
-                	$data = array(
-        				'activity' => $this->input->post('activity'),
-        				'time' => $this->input->post('time'),
-        				'comment' => $this->input->post('comment')
-								);
-					$this->db->insert('posts', $data);
-                	$this->session->set_flashdata('success_msg', 'success');
-                	$this->index();      
-                }
+            $this->index();
         }
+        else
+        {
+        	$data = array(
+        		'activity' => $this->input->post('activity'),
+        		'time' => $this->input->post('time'),
+        		'comment' => $this->input->post('comment')
+						);
+			$this->db->insert('posts', $data);
+        	$this->session->set_flashdata('success_msg', 'success');
+        	$this->index();      
+        }
+    }
 
 
 }
