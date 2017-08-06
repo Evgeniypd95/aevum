@@ -22,7 +22,7 @@ class Home extends CI_Controller {
 	{
 		$this->load->library(array('form_validation', 'session'));
 		//how to eliminate foreach?
-		$this->db->select_sum('time');
+		//$this->db->select_sum('time');
 		$data['num'] = $this->db->get('posts');
 
 		$this->db->order_by('id', 'DESC');

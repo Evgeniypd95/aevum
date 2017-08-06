@@ -10,10 +10,13 @@
             <div class="col-md-12">
             <?php foreach ($num->result() as $row): ?>
             <p class="text-center" style="margin-top: 40px;">
-            <?php if (empty($row->time)): echo "0"?>
-            <?php else: echo $row->time ?>
-            <?php endif ?>/10000</p>
-            <?php endforeach;?>
+            <?php $test=strtotime($row->date); $date = strtotime("last monday");
+echo date('M d, Y', $date); ?> 
+            <!-- <?php 
+            if (empty($row->date)) echo "0";
+            else echo $row->date;  ?>/10000</p>
+            
+            <?php endforeach;?> -->
                 <div class="progressbar"><div class="progressbar2"></div>
                 </div>
                 </div></div>
