@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group">
                             <label for="InputTime">Time</label>
-                            <input type="time" class="form-control" name="time" id="InputTime" placeholder="120 hour">
+                            <input type="text" class="form-control" name="time" id="InputTime" placeholder="120 hour">
                         </div>
                         <div class="form-group">
                             <label for="InputComment">Comment</label>
