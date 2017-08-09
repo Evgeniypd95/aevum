@@ -8,27 +8,27 @@
 
 <div class="row">
             <div class="col-md-12">
-            <?php foreach ($timedb->result() as $row): ?>
             <p class="text-center" style="margin-top: 40px;">
             Your progress from last monday to this sunday is:</br>
             <?php 
-            if (empty($row->time)) echo "0";
-            else echo $row->time;  ?>/21</p>
-            <?php endforeach;?> 
-                <div class="progressbar"><div id="myBtn" onclick="myFunction()" class="progressbar2"></div>
+            if (empty($timedb->time)) echo "0";
+            else echo $timedb->time;  ?>/21</p>
+                <div class="progressbar"><div id="myBtn" class="progressbar2"></div>
                 </div>
                 </div></div>
-                <?php foreach ($timedb->result() as $row): ?>
-<script type="text/javascript">document.getElementById("myBtn").style.width = "<?php $tothour = $row->time; $width = $tothour*100/21; if ($width>100) {echo 100;} else {echo $width;}?>%";</script>
-<?php endforeach;?> 
+                
+<script type="text/javascript">document.getElementById("myBtn").style.width = "<?php $tothour = $timedb->time; $width = $tothour*100/21; if ($width>100) {echo 100;} else {echo $width;}?>%";</script>
 
-<?php foreach ($timetotal->result() as $row): ?>
+
+
             <p class="text-center">
             Total hours:</br>
             <?php 
-            if (empty($row->time)) echo "0";
-            else echo $row->time;  ?>/10000</p>
-            <?php endforeach;?> 
+            if (empty($timetotal->time)) echo "0";
+            else echo $timetotal->time;  ?>/10000</p>
+
+            <p class="text-center">With current rate you will get to top by <?php $years = round(((10000 - 1010.35)/(21/7))/365); $year = date('Y', strtotime('tomorrow')); $sum = $year+$years; echo "Year $sum";?></p>
+            
                     
 <!-- Blog Entries Column -->
 

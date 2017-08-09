@@ -25,11 +25,13 @@ class Home extends CI_Controller {
 
 		$this->db->where('date >= ', date('Y/m/d/h/i', strtotime('monday this week')));
 		$this->db->where('date <= ', date('Y/m/d/h/i', strtotime('sunday this week')));
-		$this->db->select_sum('time');
-		$data['timedb'] = $this->db->get('posts');
+		$sql = $this->db->select_sum('time');
+		$sql = $this->db->get('posts');
+		$data['timedb'] = $sql->row();
 
-		$this->db->select_sum('time');
-		$data['timetotal'] = $this->db->get('posts');
+		$sql = $this->db->select_sum('time');
+		$sql = $this->db->get('posts');
+		$data['timetotal'] = $sql->row();
 
 		$this->db->order_by('id', 'DESC');
 		$data['query'] = $this->db->get('posts');
