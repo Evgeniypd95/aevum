@@ -48,7 +48,7 @@ class Home extends CI_Controller {
 
         $this->form_validation->set_rules('activity', 'Activity', 'required');
         $this->form_validation->set_rules('time', 'Time', 'required|numeric');
-        $this->form_validation->set_rules('comment', 'Comment', 'required');
+        $this->form_validation->set_rules('comment', 'Comment', '');
 
         if ($this->form_validation->run() == FALSE)
         {
