@@ -56,7 +56,7 @@ class Login_Controller extends CI_Controller {
         {
         	$data = array(
                 'name' => $this->input->post('login'),
-                'password' => $this->input->post('password')
+                'password' => md5($this->input->post('password'))
                 );
 
             
@@ -85,6 +85,45 @@ class Login_Controller extends CI_Controller {
         	$this->index();
             }
         	
+        }
+	}
+
+	public function register()
+	{
+		$this->load->library(array('form_validation', 'session',));
+
+		if (isset($_SESSION['id'])==FALSE) {
+			$this->load->view('templates_notlog/header');
+			$this->load->view('templates_notlog/navigation');
+			$this->load->view('notlog/signup');
+			$this->load->view('templates_notlog/footer');
+		}
+		else {
+			header("Location: http://127.0.0.1:4567/home_controller");
+			
+		}
+	}
+
+	public function signupform() {
+		$this->load->helper(array('form', 'url'));
+        $this->load->library(array('form_validation', 'session'));
+
+        $this->form_validation->set_rules('login', 'Login', 'required|is_unique[users.name]');
+        $this->form_validation->set_rules('password', 'Password', 'required|numeric');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->register();
+        }
+        else
+        {
+        	$data = array(
+        		'name' => $this->input->post('login'),
+        		'password' => md5($this->input->post('password'))
+						);
+			$this->db->insert('users', $data);
+        	$this->session->set_flashdata('success_msg', 'success, you can login now');
+        	header("Location: http://127.0.0.1:4567/login_controller");      
         }
 	}
 }

@@ -2,7 +2,8 @@
   <div>
     <?php echo validation_errors(); ?>
     <?php echo $this->session->flashdata('success_msg'); ?>
-    <?php echo form_open('http://127.0.0.1:4567/login_controller/form'); ?>
+    <?php echo form_open('http://127.0.0.1:4567/login_controller/signupform'); ?>
+        <h1>Sign up</h1>
         <div class="form-group">
             <label for="InputActivity">Login</label>
             <input type="text" class="form-control" name="login" id="InputLogin" placeholder="Login">
@@ -13,7 +14,7 @@
             <input type="text" class="form-control" name="password" id="InputPassword" placeholder="Password">
         </div>
 
-            <button type="submit" class="btn btn-primary">Go</button> <a href="http://127.0.0.1:4567/login_controller/register" class="btn btn-default">sign up</a>
+            <button type="submit" class="btn btn-primary">Go</button> 
             
     </form>
 

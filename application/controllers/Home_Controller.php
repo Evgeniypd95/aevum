@@ -27,17 +27,21 @@ class Home_Controller extends CI_Controller {
 			die();
 		}
 		
+		$userid = $_SESSION['id'];
 
+		$this->db->where('userid', $userid);
 		$this->db->where('date >= ', date('Y/m/d/h/i', strtotime('monday this week')));
 		$this->db->where('date <= ', date('Y/m/d/h/i', strtotime('sunday this week')));
 		$sql = $this->db->select_sum('time');
 		$sql = $this->db->get('posts');
 		$data['timedb'] = $sql->row();
 
+		$this->db->where('userid', $userid);
 		$sql = $this->db->select_sum('time');
 		$sql = $this->db->get('posts');
 		$data['timetotal'] = $sql->row();
 
+		$this->db->where('userid', $userid);
 		$this->db->order_by('id', 'DESC');
 		$data['query'] = $this->db->get('posts');
 		$this->load->view('templates_user_account/header');
@@ -64,7 +68,8 @@ class Home_Controller extends CI_Controller {
         	$data = array(
         		'activity' => $this->input->post('activity'),
         		'time' => $this->input->post('time'),
-        		'comment' => $this->input->post('comment')
+        		'comment' => $this->input->post('comment'),
+        		'userid' => $this->session->userdata('id')
 						);
 			$this->db->insert('posts', $data);
         	$this->session->set_flashdata('success_msg', 'success');
