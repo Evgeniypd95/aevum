@@ -38,7 +38,7 @@
                     
                     <?php echo validation_errors(); ?>
                     <?php echo $this->session->flashdata('success_msg'); ?>
-                    <?php echo form_open('http://127.0.0.1:4567/home/form'); ?>
+                    <?php echo form_open('http://127.0.0.1:4567/home_controller/form'); ?>
                         <div class="form-group">
                             <label for="InputActivity">Activity</label>
                             <input type="text" class="form-control" name="activity" id="InputActivity" placeholder="Activity">
@@ -53,7 +53,6 @@
                         </div>
                             <button type="submit" class="btn btn-default">Submit</button>
                     </form>
-                    <?php echo $this->session->flashdata('success_msg2'); ?>
                 <h2 class="page-header">
                     Your Entries
                 </h2>

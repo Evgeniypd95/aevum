@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home_Controller extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -35,10 +35,10 @@ class Home extends CI_Controller {
 
 		$this->db->order_by('id', 'DESC');
 		$data['query'] = $this->db->get('posts');
-		$this->load->view('templates_home/header');
-		$this->load->view('templates_home/navigation');
-		$this->load->view('home_page', $data);
-		$this->load->view('templates_home/footer');
+		$this->load->view('templates_user_account/header');
+		$this->load->view('templates_user_account/navigation');
+		$this->load->view('user_account/home_page', $data);
+		$this->load->view('templates_user_account/footer');
 	}
 
 	public function form()
