@@ -35,10 +35,10 @@ class Home extends CI_Controller {
 
 		$this->db->order_by('id', 'DESC');
 		$data['query'] = $this->db->get('posts');
-		$this->load->view('templates/header');
-		$this->load->view('templates/navigation');
+		$this->load->view('templates_home/header');
+		$this->load->view('templates_home/navigation');
 		$this->load->view('home_page', $data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates_home/footer');
 	}
 
 	public function form()
