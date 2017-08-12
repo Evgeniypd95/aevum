@@ -28,7 +28,7 @@
             else echo $timetotal->time;  ?>/10000</p>
 
             <p class="text-center">With current rate you will get to top by <?php $years = round(((10000 - 1010.35)/(21/7))/365); $year = date('Y', strtotime('tomorrow')); $sum = $year+$years; echo "Year $sum";?></p>
-            
+            <a href="http://127.0.0.1:4567/home_controller/logout">logout</a>
                     
 <!-- Blog Entries Column -->
 

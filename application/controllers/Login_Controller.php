@@ -20,14 +20,24 @@ class Login_Controller extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->library(array('form_validation', 'session'));
+
+
+		$this->load->library(array('form_validation', 'session',));
+
+		if (isset($_SESSION['id'])==FALSE) {
+			$this->load->view('templates_notlog/header');
+			$this->load->view('templates_notlog/navigation');
+			$this->load->view('notlog/login');
+			$this->load->view('templates_notlog/footer');
+		}
+		else {
+			header("Location: http://127.0.0.1:4567/home_controller");
+			
+		}
+			
 
 		
-
-		$this->load->view('templates_notlog/header');
-		$this->load->view('templates_notlog/navigation');
-		$this->load->view('notlog/login');
-		$this->load->view('templates_notlog/footer');
+				
 	}
 
 	public function form()
@@ -50,13 +60,28 @@ class Login_Controller extends CI_Controller {
                 );
 
             
-            $this->db->where($data); $test = $this->db->count_all_results('users');
-            if ($test==1) {
-                $this->session->set_flashdata('success_msg', 'success');
+            $this->db->where($data);
+            $check = $this->db->count_all_results('users');
+            if ($check==1) {
+
+            	$this->db->where($data);
+				$sql = $this->db->select('id');
+				$sql = $this->db->get('users');
+				$fetchid = $sql->row();
+				$outputid = $fetchid->id;
+
+            	$newdata = array(
+        		'id'  => $outputid,
+        		'logged_in' => TRUE
+						);
+			$this->session->set_userdata($newdata);
+
+            redirect('http://127.0.0.1:4567/home_controller');
         	$this->index();
             }
+
             else {
-                $this->session->set_flashdata('success_msg', 'no success');
+            $this->session->set_flashdata('success_msg', 'no success');
         	$this->index();
             }
         	

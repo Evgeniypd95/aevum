@@ -13,7 +13,7 @@
             <input type="text" class="form-control" name="password" id="InputPassword" placeholder="Password">
         </div>
 
-            <button type="submit" class="btn btn-default">Go</button>
+            <button type="submit" class="btn btn-primary">Go</button> <a href="http://127.0.0.1:4567/login_controller/register" class="btn btn-default">reg up</a>
             
     </form>
 

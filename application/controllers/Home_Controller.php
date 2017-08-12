@@ -22,6 +22,11 @@ class Home_Controller extends CI_Controller {
 	{
 		$this->load->library(array('form_validation', 'session'));
 		//how to eliminate foreach?
+		if (isset($_SESSION['id'])==FALSE) {
+			header("Location: http://127.0.0.1:4567/");
+			die();
+		}
+		
 
 		$this->db->where('date >= ', date('Y/m/d/h/i', strtotime('monday this week')));
 		$this->db->where('date <= ', date('Y/m/d/h/i', strtotime('sunday this week')));
@@ -46,7 +51,7 @@ class Home_Controller extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $this->load->library(array('form_validation', 'session'));
 
-        $this->form_validation->set_rules('activity', 'Activity', 'required');
+        $this->form_validation->set_rules('activity', 'Activity', '');
         $this->form_validation->set_rules('time', 'Time', 'required|numeric');
         $this->form_validation->set_rules('comment', 'Comment', '');
 
@@ -65,6 +70,12 @@ class Home_Controller extends CI_Controller {
         	$this->session->set_flashdata('success_msg', 'success');
         	$this->index();      
         }
+    }
+
+    public function logout()
+    {
+    	$this->session->sess_destroy();
+    	header("Location: http://127.0.0.1:4567/login_controller");
     }
 
 
