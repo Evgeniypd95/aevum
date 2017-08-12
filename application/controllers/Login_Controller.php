@@ -22,11 +22,11 @@ class Login_Controller extends CI_Controller {
 	{
 		$this->load->library(array('form_validation', 'session'));
 
+		
 
-		$data['test'] = "";
 		$this->load->view('templates_notlog/header');
 		$this->load->view('templates_notlog/navigation');
-		$this->load->view('notlog/login', $data);
+		$this->load->view('notlog/login');
 		$this->load->view('templates_notlog/footer');
 	}
 
@@ -45,9 +45,21 @@ class Login_Controller extends CI_Controller {
         else
         {
         	$data = array(
-        		'login' =>);
-        	$this->session->set_flashdata('success_msg', 'success');
+                'name' => $this->input->post('login'),
+                'password' => $this->input->post('password')
+                );
+
+            
+            $this->db->where($data); $test = $this->db->count_all_results('users');
+            if ($test==1) {
+                $this->session->set_flashdata('success_msg', 'success');
         	$this->index();
+            }
+            else {
+                $this->session->set_flashdata('success_msg', 'no success');
+        	$this->index();
+            }
+        	
         }
 	}
 }
