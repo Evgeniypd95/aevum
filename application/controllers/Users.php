@@ -93,7 +93,7 @@ class Users extends CI_Controller {
         }
         $data['user'] = $userData;
         //load the view
-        $this->load->view('http://127.0.0.1:4567/users/registration', $data);
+        $this->load->view('users/registration', $data);
     }
     
     /*

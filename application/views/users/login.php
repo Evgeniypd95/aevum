@@ -26,7 +26,7 @@
             <input type="submit" name="loginSubmit" class="btn-primary" value="Submit"/>
         </div>
     </form>
-    <p class="footInfo">Don't have an account? <a href="http://127.0.0.1:4567/users/registration">Register here</a></p>
+    <p class="footInfo">Don't have an account? <a href="users/registration">Register here</a></p>
 </div>
 </body>
 </html>

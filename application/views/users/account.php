@@ -13,6 +13,8 @@
         <p><b>Phone: </b><?php echo $user['phone']; ?></p>
         <p><b>Gender: </b><?php echo $user['gender']; ?></p>
     </div>
+
+    <p class="footInfo">Wanna leave?<a href="http://127.0.0.1:4567/users/logout">Logout here</a></p>
 </div>
 </body>
 </html>
