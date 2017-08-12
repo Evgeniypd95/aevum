@@ -37,6 +37,11 @@ class Home_Controller extends CI_Controller {
 		$data['timedb'] = $sql->row();
 
 		$this->db->where('userid', $userid);
+		$sql = $this->db->select('start');
+		$sql = $this->db->get('timer');
+		$data['timer'] = $sql->row();
+
+		$this->db->where('userid', $userid);
 		$sql = $this->db->select_sum('time');
 		$sql = $this->db->get('posts');
 		$data['timetotal'] = $sql->row();
@@ -81,6 +86,15 @@ class Home_Controller extends CI_Controller {
     {
     	$this->session->sess_destroy();
     	header("Location: http://127.0.0.1:4567/login_controller");
+    }
+
+    public function strtcountdown() {
+    	$data = array(
+    		'start' => date('Y/m/d/h:i:s'),
+    		'userid' => $this->session->userdata('id')
+    		);
+    	$this->db->insert('timer', $data);
+    	header("Location: http://127.0.0.1:4567/");
     }
 
 

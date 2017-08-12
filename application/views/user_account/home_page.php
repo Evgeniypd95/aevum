@@ -28,14 +28,46 @@
             else echo $timetotal->time;  ?>/10000</p>
 
             <p class="text-center">With current rate you will get to top by <?php $years = round(((10000 - 1010.35)/(21/7))/365); $year = date('Y', strtotime('tomorrow')); $sum = $year+$years; echo "Year $sum";?></p>
-            <a href="http://127.0.0.1:4567/home_controller/logout">logout</a>
+            <a href="http://127.0.0.1:4567/home_controller/logout/">logout</a> 
                     
 <!-- Blog Entries Column -->
-
+    
                 <h2 class="page-header">
                     New Entry
                 </h2>
-                    
+                <a href="http://127.0.0.1:4567/home_controller/strtcountdown">start</a>
+                <?php if (!empty($timer->start)) {
+                    echo $timer->start;
+                } 
+                 ?>
+                    <!-- <p id="demo"></p>
+                    <script type="text/javascript">// Set the date we're counting down to
+
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+    
+    
+    // Find the distance between now an the count down date
+    var d = new Date();    
+    // Time calculations for days, hours, minutes and seconds
+    var c_year = d.getFullYear();
+    var c_month = d.getMonth()+1;
+    var c_day = d.getDate();
+    var c_hour = d.getHours();
+    var c_min = d.getMinutes();
+    var c_sec = d.getSeconds();
+    
+    // Output the result in an element with id="demo"
+    document.getElementById("demo").innerHTML = c_year + "/" + c_month + "/" + c_day + " " + c_hour + ":" + c_min + ":" + c_sec;
+    
+    // If the count down is over, write some text 
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "EXPIRED";
+    }
+}, 1000);</script> -->
                     <?php echo validation_errors(); ?>
                     <?php echo $this->session->flashdata('success_msg'); ?>
                     <?php echo form_open('http://127.0.0.1:4567/home_controller/form'); ?>
