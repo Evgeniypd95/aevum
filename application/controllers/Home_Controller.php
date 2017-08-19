@@ -30,8 +30,7 @@ class Home_Controller extends CI_Controller {
 		$userid = $_SESSION['id'];
 
 		$this->db->where('userid', $userid);
-		$this->db->where('date >= ', date('Y/m/d/h/i', strtotime('monday this week')));
-		$this->db->where('date <= ', date('Y/m/d/h/i', strtotime('sunday this week')));
+		$this->db->where('week', date('W', strtotime('W')));
 		$sql = $this->db->select_sum('time');
 		$sql = $this->db->get('posts');
 		$data['timedb'] = $sql->row();
@@ -74,7 +73,8 @@ class Home_Controller extends CI_Controller {
         		'activity' => $this->input->post('activity'),
         		'time' => $this->input->post('time'),
         		'comment' => $this->input->post('comment'),
-        		'userid' => $this->session->userdata('id')
+        		'userid' => $this->session->userdata('id'),
+        		'week' => date('W', strtotime('W'))
 						);
 			$this->db->insert('posts', $data);
         	$this->session->set_flashdata('success_msg', 'success');
@@ -90,7 +90,7 @@ class Home_Controller extends CI_Controller {
 
     public function strtcountdown() {
     	$data = array(
-    		'start' => date('Y/m/d/h:i:s'),
+    		'start' => date('Y-m-d H:i:s'),
     		'userid' => $this->session->userdata('id')
     		);
     	$this->db->insert('timer', $data);

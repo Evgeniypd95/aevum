@@ -37,10 +37,72 @@
                 </h2>
                 <a href="http://127.0.0.1:4567/home_controller/strtcountdown">start</a>
                 <?php if (!empty($timer->start)) {
-                    echo $timer->start;
+                    $starttime = $timer->start;
+                    $nowtime = date('Y-m-d H:i:s');
+                    $timediff = date('H:i:s', date(strtotime($nowtime))-date(strtotime($starttime)));
+                    echo $timediff;
                 } 
+
                  ?>
-                    <!-- <p id="demo"></p>
+            
+<!-- <script type="text/javascript">
+
+
+    var currentTime = new Date("<?php echo $starttime; ?>");
+var y = currentTime.getFullYear();
+var d = currentTime.getDate();
+var m = currentTime.getMonth()+1;
+var h = currentTime.getHours();
+var i = currentTime.getMinutes();
+var s = currentTime.getSeconds();
+
+if (i < 10) {
+    i = "0" + i;
+}
+y = y.toString().substr(-2);
+
+var tst = m + "/"+d+"/"+ y+" "+ h + ":"+ i+":"+s;
+<?php $test5 = 'document.write(tst);'; ?>
+// document.write(tst);
+
+</script>
+
+<?php echo $test5; ?> -->
+<!-- 
+                 <p id="demo"></p>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("<?php echo $starttime; ?>").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date("<?php echo $nowtime; ?>").getTime();
+
+  // Find the distance between now an the count down date
+  var distance = - countDownDate + now;
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hoursdiff = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script> 
+ -->
+                   <!-- <p id="demo"></p>
                     <script type="text/javascript">// Set the date we're counting down to
 
 
