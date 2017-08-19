@@ -61,7 +61,6 @@ class Home_Controller extends CI_Controller {
 
         $this->form_validation->set_rules('activity', 'Activity', '');
         $this->form_validation->set_rules('time', 'Time', 'required|numeric');
-        $this->form_validation->set_rules('comment', 'Comment', '');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -78,6 +77,7 @@ class Home_Controller extends CI_Controller {
 						);
 			$this->db->insert('posts', $data);
         	$this->session->set_flashdata('success_msg', 'success');
+        	$this->stopcount();
         	$this->index();      
         }
     }
@@ -88,13 +88,22 @@ class Home_Controller extends CI_Controller {
     	header("Location: http://127.0.0.1:4567/login_controller");
     }
 
-    public function strtcountdown() {
+    public function startcount()
+    {
     	$data = array(
-    		'start' => date('Y-m-d H:i:s'),
-    		'userid' => $this->session->userdata('id')
-    		);
+        		'userid' => $this->session->userdata('id')
+						);
     	$this->db->insert('timer', $data);
     	header("Location: http://127.0.0.1:4567/");
+    }
+
+    public function stopcount()
+    {	
+    	$userid = $this->session->userdata('id');
+    	$this->db->where('userid', $userid);
+		$this->db->delete('timer');
+		header("Location: http://127.0.0.1:4567/");
+		
     }
 
 
