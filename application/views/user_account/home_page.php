@@ -1,37 +1,43 @@
 <!-- Page Content -->
     <div class="container" style="margin-top: 20px;">
 
-        
 
-            
-            
+
+
+
 
 <div class="row">
             <div class="col-md-12">
             <p class="text-center" style="margin-top: 40px;">
             Your progress from last monday to this sunday is:</br>
-            <?php 
+            <?php
             if (empty($timedb->time)) echo "0";
             else echo $timedb->time;  ?>/21</p>
                 <div class="progressbar"><div id="myBtn" class="progressbar2"></div>
                 </div>
                 </div></div>
+
+                <?php
+                if (!empty($remainder)) echo $remainder; ?>
+
                 
+                <a href="http://127.0.0.1:4567/home_controller/useremainder">use remainder for your current week.</a>
+
 <script type="text/javascript">document.getElementById("myBtn").style.width = "<?php $tothour = $timedb->time; $width = $tothour*100/21; if ($width>100) {echo 100;} else {echo $width;}?>%";</script>
 
 
 
             <p class="text-center">
             Total hours:</br>
-            <?php 
+            <?php
             if (empty($timetotal->time)) echo "0";
             else echo $timetotal->time;  ?>/10000</p>
 
             <p class="text-center">With current rate you will get to top by <?php $years = round(((10000 - 1010.35)/(21/7))/365); $year = date('Y', strtotime('tomorrow')); $sum = $year+$years; echo "Year $sum";?></p>
-            <a href="http://127.0.0.1:4567/home_controller/logout/">logout</a> 
-                    
+            <a href="http://127.0.0.1:4567/home_controller/logout/">logout</a>
+
 <!-- Blog Entries Column -->
-    
+
                 <h2 class="page-header">
                     New Entry
                 </h2>
@@ -44,7 +50,7 @@
                 $minutes = $diff->format("%i")/60;
                 $seconds = $diff->format("%s")/360;
                 $timediff = $hours+$minutes+$seconds;}
- ?> 
+ ?>
  <div id="scope"><?php if (!empty($timer->start)){echo $diff->format("%d days %h hours %i minutes %s seconds");} ?></div> <script type="text/javascript">
      var $scores = $("#scores");
 setInterval(function () {$("#scope").load("http://127.0.0.1:4567/home_controller/ #scope");
@@ -77,17 +83,13 @@ setInterval(function () {$("#scope").load("http://127.0.0.1:4567/home_controller
                 </h2>
 
                 <!-- First Blog Post -->
-                
+
                 <?php foreach ($query->result() as $row): ?>
 
-                    
-                
+
+
                 <h3><?php echo $row->activity;?></h3><br />
                 Time: <?php echo $row->time;?><br />
                 Comment: <?php echo $row->comment;?><hr>
 
                 <?php endforeach;?>
-                
-            
-
-        

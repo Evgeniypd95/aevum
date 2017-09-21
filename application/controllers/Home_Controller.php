@@ -46,12 +46,25 @@ class Home_Controller extends CI_Controller {
 		$data['timetotal'] = $sql->row();
 
 		$this->db->where('userid', $userid);
+		$weeks = 32;
+		$this->db->where('week', $weeks);
+		$sql = $this->db->select_sum('time');
+		$sql = $this->db->get('posts');
+		$datesum = $sql->row();
+		$datesum2 = $datesum->time;
+		if ($datesum2 > 21) {
+			$data['remainder'] = $datesum2 - 21;
+		}
+
+		$this->db->where('userid', $userid);
 		$this->db->order_by('id', 'DESC');
 		$data['query'] = $this->db->get('posts');
 		$this->load->view('templates_user_account/header');
 		$this->load->view('templates_user_account/navigation');
 		$this->load->view('user_account/home_page', $data);
 		$this->load->view('templates_user_account/footer');
+
+
 	}
 
 	public function form()
@@ -104,6 +117,21 @@ class Home_Controller extends CI_Controller {
 		$this->db->delete('timer');
 		header("Location: http://127.0.0.1:4567/");
 		
+    }
+
+    public function useremainder() 
+    {
+    	$data = array(
+        		'activity' => $this->input->post('activity'),
+        		'time' => ($datesum2 - 21)*(-1),
+        		'comment' => $this->input->post('comment'),
+        		'userid' => $this->session->userdata('id'),
+        		'week' => date('W', strtotime('W'))
+						);
+			$this->db->insert('posts', $data);
+        	$this->session->set_flashdata('success_msg', 'success');
+
+		header("Location: http://127.0.0.1:4567/");
     }
 
 
